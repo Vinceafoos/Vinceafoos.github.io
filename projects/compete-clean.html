@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compete Clean | Vincent Ryan</title>
+  <meta name="description" content="Compete Clean: a retro 2D platformer about catching a doping athlete. Game design, level design and Python/raylib.">
+  <link rel="icon" href="../assets/brand/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=6">
+  <style>
+    .cc-hero { position: relative; border-radius: var(--r-lg); overflow: hidden; margin-top: 40px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
+    .cc-hero img { width: 100%; image-rendering: pixelated; }
+    .p-hero h1.pixel { font-family: var(--f-pixel); letter-spacing: 0; font-size: clamp(40px, 7vw, 88px); }
+    .video-wrap { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: var(--shadow-2); }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .codes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    .code-card { background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--r-md); padding: 22px; }
+    .code-card h4 { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #8a4a35; margin-bottom: 10px; font-weight: 600; }
+    .code-card p { font-size: 15.5px; margin: 0; }
+    @media (max-width: 640px) { .codes { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html" aria-label="Vincent Ryan, home"><img src="../assets/brand/logo.svg" alt="" width="52" height="25"><span>Vincent Ryan</span></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#build">Build</a></li>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="https://github.com/Vinceafoos" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a class="cta" href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="p-hero dark" data-nav="dark" style="background:linear-gradient(170deg,#101b3d,#071219 70%)">
+  <div class="wrap">
+    <a class="back" href="../index.html#build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All work</a>
+    <span class="kicker">Game design · Spring 2026</span>
+    <h1 class="pixel">Compete Clean</h1>
+    <p class="p-lede">A retro 2D platformer where you play an anti-doping agent collecting evidence against a suspected athlete. Beat the clock across three levels while dodging javelins, track spikes, sand pits, and wind. The more evidence you bring back, the better your chance of justice.</p>
+    <dl class="p-meta">
+      <div><dt>Team</dt><dd>Vincent Ryan &amp; Liam Davis</dd></div>
+      <div><dt>Context</dt><dd>Game development course, Colgate</dd></div>
+      <div><dt>Stack</dt><dd>Python · raylib · CSV levels</dd></div>
+      <div><dt>Links</dt><dd><a href="https://github.com/Vinceafoos/2D-Platform-Compete-Clean-" target="_blank" rel="noopener">GitHub repo ↗</a><br><a href="#video">Watch gameplay ↓</a></dd></div>
+    </dl>
+    <div class="cc-hero"><img src="../assets/compete/shot1.jpg" alt="Compete Clean title screen: a pixel-art athlete on a podium in a stadium, a javelin thrower, and a doping kit"></div>
+  </div>
+</section>
+
+<section class="p-body paper">
+  <div class="wrap p-grid">
+    <ul class="toc">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#video">Gameplay</a></li>
+      <li><a href="#mechanics">Mechanics</a></li>
+      <li><a href="#design">Design analysis</a></li>
+      <li><a href="#tech">Technical details</a></li>
+      <li><a href="#credits">Process &amp; credits</a></li>
+    </ul>
+    <div class="prose">
+      <section id="overview">
+        <span class="kicker" style="color:#b4452a">Overview</span>
+        <h2>A light game about a heavy topic</h2>
+        <p>Doping is a long-running problem in athletics, and catching cheaters is much harder than it sounds. We wanted players to feel some of that difficulty while still having a fun, approachable game. Our art direction borrows the friendly 8-bit look of <em>Kirby's Adventure</em>, and our charge jump is a nod to <em>Super Mario Bros. 2</em>.</p>
+        <p>You never get told outright that the athlete is guilty. That's the mystery the player has to resolve by collecting enough blood samples across three escalating levels.</p>
+        <div class="fig-grid">
+          <figure><img src="../assets/compete/splash.jpg" alt="Gameplay: the agent runs along a brick track under a plane towing a Compete Clean banner" loading="lazy"></figure>
+          <figure><img src="../assets/compete/shot4.jpg" alt="Gameplay: stone platforms, a weight pickup and a blood bag" loading="lazy"></figure>
+        </div>
+      </section>
+
+      <section id="video">
+        <span class="kicker" style="color:#b4452a">Gameplay</span>
+        <h2>See it in motion</h2>
+        <!-- TODO(Vincent): swap for your newer clips when ready (YouTube/Vimeo embed or an MP4 in assets/compete/) -->
+        <div class="video-wrap"><iframe src="https://drive.google.com/file/d/1cQSUft-1aVCI4HAYa1eDMLtbW1C-iEll/preview" title="Compete Clean gameplay video" allow="autoplay; fullscreen" loading="lazy"></iframe></div>
+        <p style="font-size:14px;color:var(--muted);margin-top:10px">Video not loading? <a href="https://drive.google.com/file/d/1cQSUft-1aVCI4HAYa1eDMLtbW1C-iEll/view" target="_blank" rel="noopener">Open it on Google Drive ↗</a></p>
+      </section>
+
+      <section id="mechanics">
+        <span class="kicker" style="color:#b4452a">Mechanics</span>
+        <h2>Tools and obstacles</h2>
+        <ul class="feature-list">
+          <li><img src="../assets/compete/jump.png" alt="" loading="lazy"><b>Jump</b><span>Space to hop over hazards or onto higher platforms.</span></li>
+          <li><img src="../assets/compete/charge_jump.png" alt="" loading="lazy"><b>Charge jump</b><span>Hold down to charge a bigger jump. The animation speed scales with charge, so the sprite itself shows how strong the jump will be.</span></li>
+          <li><img src="../assets/compete/weight.png" alt="" loading="lazy"><b>Weights</b><span>Collect them to raise your maximum charge jump. That's progression you can feel.</span></li>
+          <li><img src="../assets/compete/blood_bag.png" alt="" loading="lazy"><b>Blood bags</b><span>The evidence. The more you collect, the better the odds the final test succeeds.</span></li>
+          <li><img src="../assets/compete/jav_thrower.png" alt="" loading="lazy"><b>Javelin throwers</b><span>Javelins fly in a real arc instead of a straight line, so you read the throw and time your move.</span></li>
+          <li><img src="../assets/compete/spike.png" alt="" loading="lazy"><b>Track spikes</b><span>Static hazards that punish careless landings.</span></li>
+          <li><img src="../assets/compete/sand_pit.png" alt="" loading="lazy"><b>Sand pits</b><span>Slow movement and cut jump height, a nice combo with timed hazards.</span></li>
+          <li><img src="../assets/compete/wind.png" alt="" loading="lazy"><b>Wind</b><span>Each level has a 1-in-5 chance of wind with random direction and strength, so no two runs feel the same.</span></li>
+        </ul>
+      </section>
+
+      <section id="design">
+        <span class="kicker" style="color:#b4452a">Design analysis</span>
+        <h2>Letting the gameplay tell the story</h2>
+        <p>Instead of telling the story through cutscenes, we planned it with two narrative lenses so that the act of playing carries the meaning:</p>
+        <div class="codes">
+          <div class="code-card"><h4>Action codes</h4><p>Dodging javelins, clearing spikes, and making precise jumps push the story forward. Each obstacle stands for the institutional resistance investigators face, and intensity rises each level to build narrative escalation.</p></div>
+          <div class="code-card"><h4>Enigma codes</h4><p>The game opens with a question about an athlete's integrity, not an accusation. Each piece of evidence brings you closer to an answer, but the mystery only resolves at the end.</p></div>
+        </div>
+        <blockquote class="pull">A cheerful, retro surface over a serious theme. The contrast is the point.</blockquote>
+        <h3>Designing for playtests</h3>
+        <p>We built a debug mode early on. It shows player, javelin, and spike hitboxes, live jump velocity, animation frame, and grounded state, and pressing <code>N</code> skips to the next level. It made tuning difficulty and testing later levels quick, which is the same instinct behind good research tooling: make the thing you need to observe visible.</p>
+      </section>
+
+      <section id="tech">
+        <span class="kicker" style="color:#b4452a">Technical details</span>
+        <h2>Small systems that add feel</h2>
+        <ul>
+          <li><strong>Javelin arcs</strong> use projectile geometry from Python's math library, so throws feel physical.</li>
+          <li><strong>Camera shake and i-frames.</strong> Taking damage shakes the camera by a random x/y offset for a set duration. The player then flickers during a short invincibility window.</li>
+          <li><strong>Wind system.</strong> A timed interval re-rolls direction and strength, with 18 particles drawn to show it.</li>
+          <li><strong>Data-driven levels.</strong> Three levels are authored as CSV tile maps, so we could iterate on layouts without touching code.</li>
+        </ul>
+        <div class="fig-grid">
+          <figure><img src="../assets/compete/shot3.jpg" alt="Level 3 intro with a javelin thrower on a high platform" loading="lazy"><figcaption>Level 3: a javelin thrower guards the high route.</figcaption></figure>
+          <figure><img src="../assets/compete/instructions.jpg" alt="Instructions screen" loading="lazy"><figcaption>Instructions screen.</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="credits">
+        <span class="kicker" style="color:#b4452a">Process &amp; credits</span>
+        <h2>An AI-assisted art pipeline</h2>
+        <p>Neither of us is a pixel artist, so we generated sprite sheets with Gemini and screens with ChatGPT, then edited them by hand to match our style. Feeding the main sprite sheet back into later prompts kept the look consistent across the game. We kept a dated roadmap for every work session and documented all third-party music and sound credits in the design doc.</p>
+        <div class="fig-grid">
+          <figure><img src="../assets/compete/shot1.jpg" alt="Title screen" loading="lazy"><figcaption>Title screen.</figcaption></figure>
+          <figure><img src="../assets/compete/shot2.jpg" alt="Doper Caught ending screen showing 11 blood bags collected" loading="lazy"><figcaption>The "Doper Caught!" ending, with evidence and time tallied.</figcaption></figure>
+        </div>
+      </section>
+
+      <a class="next-proj" href="bundles-of-skills.html"><span><small>Next project</small><b>Bundles of Skills</b></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="contact" style="padding:50px 0 40px" data-nav="dark">
+  <div class="wrap"><div class="footer" style="margin-top:0;border:0;padding:0"><span>© 2026 Vincent Ryan</span><span><a href="../index.html">Home</a> · <a href="mailto:vryan@andrew.cmu.edu">vryan@andrew.cmu.edu</a></span></div></div>
+</footer>
+<script src="../js/main.js?v=6" defer></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitch Imperfect | Vincent Ryan</title>
+  <meta name="description" content="Pitch Imperfect: a real-time karaoke web app with live pitch detection, built at Gate Hacks 2025. Try it with your mic.">
+  <link rel="icon" href="../assets/brand/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=6">
+  <link rel="stylesheet" href="../css/demos.css?v=6">
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html" aria-label="Vincent Ryan, home"><img src="../assets/brand/logo.svg" alt="" width="52" height="25"><span>Vincent Ryan</span></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#build">Build</a></li>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="https://github.com/Vinceafoos" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a class="cta" href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="p-hero dark" data-nav="dark" style="background:linear-gradient(160deg,#1d0c33,#071219 70%)">
+  <div class="wrap">
+    <a class="back" href="../index.html#build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All work</a>
+    <div class="p-badges"><span class="badge badge-live">Sing into it</span></div>
+    <h1>Pitch Imperfect</h1>
+    <p class="p-lede">A real-time karaoke web app. It listens through your microphone, works out what note you're singing many times a second, and scores how close you get to each line's target note.</p>
+    <dl class="p-meta">
+      <div><dt>Event</dt><dd>Gate Hacks · Colgate<br>Fall 2025</dd></div>
+      <div><dt>Format</dt><dd>Team hackathon project</dd></div>
+      <div><dt>Stack</dt><dd>React · Vite · Web Audio API · pitchy</dd></div>
+      <div><dt>Links</dt><dd><a href="https://github.com/Vinceafoos/GATE-HACKS-2025" target="_blank" rel="noopener">GitHub repo ↗</a><br><a href="#try">Try it ↓</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="p-body">
+  <div class="wrap p-grid">
+    <ul class="toc">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#try">Try it</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#design">Design decisions</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+    </ul>
+    <div class="prose">
+      <section id="overview">
+        <span class="kicker">Overview</span>
+        <h2>Karaoke that actually listens</h2>
+        <p>Most casual karaoke games score you on whether you made noise at the right time. We wanted one that cares whether you're <em>in tune</em>, runs in a browser with no install, and is still fun when you're bad at it. The name says it all.</p>
+        <p>You pick a song (<em>Twinkle Twinkle Little Star</em> or <em>Fireflies</em>), choose solo or duo mode, and sing along with the track. Lyrics advance line by line, a pitch bar shows your note against the target, and your score builds as you go.</p>
+        <!-- TODO(Vincent): add your role on the team and a screenshot or clip of the original app -->
+      </section>
+
+      <section id="try">
+        <span class="kicker">Try it</span>
+        <h2>Sing a few lines</h2>
+        <p>This is a rebuild of the core loop for the web page, using the same pitch library and scoring tiers as the hackathon app. Press <strong>Start singing</strong>, allow the microphone, and follow the gold bars. Use <strong>Hear note</strong> if you need a starting pitch. Audio is processed locally and never leaves your device.</p>
+      </section>
+    </div>
+  </div>
+
+  <div class="wrap" style="max-width:1000px">
+    <div class="pi" id="pi">
+      <div class="pi-top">
+        <div class="pi-title">Twinkle Twinkle Little Star<small>Solo mode · live pitch</small></div>
+        <div class="pi-controls">
+          <label class="pi-toggle" title="Count a note sung in any octave"><input type="checkbox" id="pi-octave" checked> Any octave</label>
+          <button class="pi-btn" id="pi-tone" type="button">♪ Hear note</button>
+          <button class="pi-btn primary" id="pi-start" type="button">● Start singing</button>
+        </div>
+      </div>
+      <div class="pi-stage">
+        <canvas aria-label="Pitch timeline: target notes as bars, your voice as a gold line"></canvas>
+        <div class="pi-feedback" id="pi-feedback">Mic off</div>
+        <div class="pi-note" id="pi-note"><b>—</b><span>— Hz</span></div>
+      </div>
+      <div class="pi-bottom">
+        <div class="pi-lyric" id="pi-lyric"></div>
+        <div class="pi-score" id="pi-score"><b>000000</b><span>Grade: —</span></div>
+      </div>
+      <div class="pi-msg" id="pi-msg" role="status"></div>
+    </div>
+  </div>
+
+  <div class="wrap p-grid">
+    <div></div>
+    <div class="prose">
+      <section id="how">
+        <span class="kicker">How it works</span>
+        <h2>From air pressure to a score</h2>
+        <ol class="steps-ol">
+          <li><strong>Capture.</strong> <code>getUserMedia</code> opens the mic and feeds a Web Audio <code>AnalyserNode</code>, which hands us 2,048 raw samples every animation frame.</li>
+          <li><strong>Detect.</strong> The <code>pitchy</code> library runs the McLeod Pitch Method on those samples and returns a frequency plus a <em>clarity</em> score. We ignore anything below 0.7 clarity or outside 50 to 1000 Hz, which filters out breaths, room noise, and consonants.</li>
+          <li><strong>Smooth.</strong> Raw pitch jitters, so we keep a running average that weights new readings at 10%. That keeps the needle readable without lagging too far behind.</li>
+          <li><strong>Score.</strong> Each lyric line has a target frequency. Every voiced frame compares your pitch to the target: within 8% earns 15 points, within 18% earns 8, and within 30% earns 4. The maximum possible score grows with every frame you sing, so accuracy is fair however long you hold a note.</li>
+        </ol>
+        <div class="codeblock"><span class="c">// The scoring tiers from the hackathon app</span>
+<span class="k">const</span> diffRatio = Math.abs(freq - line.targetFreq) / line.targetFreq;
+<span class="k">let</span> delta = diffRatio &lt; <span class="s">0.08</span> ? 15 : diffRatio &lt; <span class="s">0.18</span> ? 8 : diffRatio &lt; <span class="s">0.30</span> ? 4 : 0;
+setMaxScore(prev =&gt; prev + 15);
+setScore(prev =&gt; prev + delta);</div>
+      </section>
+
+      <section id="design">
+        <span class="kicker">Design decisions</span>
+        <h2>Forgiving where it matters</h2>
+        <ul>
+          <li><strong>Tiered scoring instead of pass/fail.</strong> Being close still earns something. For a party game, encouragement keeps people singing.</li>
+          <li><strong>Per-line targets.</strong> Scoring every individual note would punish casual singers. One target per line rewards getting into the right range.</li>
+          <li><strong>Silence isn't failure.</strong> Frames without a clear pitch aren't counted against you, so taking a breath doesn't hurt your grade.</li>
+          <li><strong>Any-octave mode (added for this page).</strong> The original targets sit around G4, which is high for many voices. Folding your pitch into the target's octave lets anyone play.</li>
+        </ul>
+      </section>
+
+      <section id="reflection">
+        <span class="kicker">Reflection</span>
+        <h2>What I learned</h2>
+        <p>Real-time audio is unforgiving. Everything has to fit inside a single animation frame, and the difference between "feels responsive" and "feels broken" was a few smoothing constants. If I took it further, I'd run a quick playtest on smoothing strength and scoring thresholds. Those are UX decisions disguised as DSP parameters, and they deserve real users rather than our guesses.</p>
+      </section>
+
+      <a class="next-proj" href="compete-clean.html"><span><small>Next project</small><b>Compete Clean</b></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="contact" style="padding:50px 0 40px" data-nav="dark">
+  <div class="wrap"><div class="footer" style="margin-top:0;border:0;padding:0"><span>© 2026 Vincent Ryan</span><span><a href="../index.html">Home</a> · <a href="mailto:vryan@andrew.cmu.edu">vryan@andrew.cmu.edu</a></span></div></div>
+</footer>
+<script src="../js/main.js?v=6" defer></script>
+<script type="module" src="../js/pitch-demo.js?v=6"></script>
+</body>
+</html>

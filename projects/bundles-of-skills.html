@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bundles of Skills | Vincent Ryan</title>
+  <meta name="description" content="Bundles of Skills: a squad of AI pets for your browser. Top 5 of 69 teams at the CMU Nova Hackathon. Includes a live demo.">
+  <link rel="icon" href="../assets/brand/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=6">
+  <link rel="stylesheet" href="../css/demos.css?v=6">
+  <script type="importmap">{ "imports": { "@anthropic-ai/sdk": "https://cdn.jsdelivr.net/npm/@anthropic-ai/sdk@1.6.0/+esm" } }</script>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html" aria-label="Vincent Ryan, home"><img src="../assets/brand/logo.svg" alt="" width="52" height="25"><span>Vincent Ryan</span></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#build">Build</a></li>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="https://github.com/Vinceafoos" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a class="cta" href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="p-hero dark" data-nav="dark">
+  <div class="wrap">
+    <a class="back" href="../index.html#build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All work</a>
+    <div class="p-badges"><span class="badge badge-gold">🏆 Top 5 of 69 teams</span><span class="badge badge-live">Live demo below</span></div>
+    <h1>Bundles of Skills</h1>
+    <p class="p-lede">A squad of AI pets for your browser. Each pet is a bundle of skills with its own permissions. Drag one onto your work and it offers only the skills that fit. Anything that would change your work comes back as a proposal you approve first.</p>
+    <dl class="p-meta">
+      <div><dt>Event</dt><dd>CMU Nova Hackathon<br>Nov 2026 · Sandia Security Track</dd></div>
+      <div><dt>Outcome</dt><dd>Top 5 of 69 teams</dd></div>
+      <div><dt>Stack</dt><dd>Chrome MV3 · JavaScript · Claude API · esbuild</dd></div>
+      <div><dt>Links</dt><dd><a href="https://github.com/kkuang-max/bundlesofskills" target="_blank" rel="noopener">GitHub repo ↗</a><br><a href="#try">Try the demo ↓</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="p-body">
+  <div class="wrap p-grid">
+    <ul class="toc">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#try">Try it</a></li>
+      <li><a href="#pieces">How it works</a></li>
+      <li><a href="#research">Research &amp; design</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#install">Get the extension</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+    </ul>
+
+    <div class="prose">
+      <section id="overview">
+        <span class="kicker">Overview</span>
+        <h2>AI help that respects what's yours</h2>
+        <p>Most AI assistants live in a separate chat window. You copy text out, paste it in, and copy the answer back. We wanted the help to come to the work instead, without the assistant getting free rein over your documents.</p>
+        <p>Our answer was a <strong>squad of pets</strong>. Each pet is a small, understandable bundle: a few skills, a set of things it's allowed to read, and a personality. Scout reads, Quill writes, Pixel looks at images, and Security, a hedgehog, guards every other pet. You drag a pet onto a paragraph, a text field, an image, a Google Docs page, or a Figma frame, and it offers only the skills that make sense there.</p>
+        <figure><img src="../assets/bundles/summarize-on-page.jpg" alt="Scout summarizing a picked paragraph on a Wikipedia page" loading="lazy"><figcaption>Scout summarizing a paragraph on Wikipedia, right where you're reading.</figcaption></figure>
+        <!-- TODO(Vincent): add a sentence on your role and the team, e.g. "I designed X and built Y with A, B and C." -->
+      </section>
+
+      <section id="try">
+        <span class="kicker">Try it</span>
+        <h2>The extension, running on this page</h2>
+        <p>This is a working slice of the real extension. It uses the project's own pet art, its on-device Security scanner, and its Claude client, copied straight from the repo. <strong>Drag a pet onto a paragraph</strong> (or tap a pet, then tap a paragraph). Security's skills run entirely in your browser, so try them on paragraphs 2 and 3.</p>
+      </section>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="demo bos" id="bos">
+      <div class="demo-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="url">blog.example.com/why-playtesting-beats-guessing</span>
+        <button class="bos-btn" id="bos-reset" type="button">Reset sample</button>
+      </div>
+      <div class="bos-stage">
+        <article class="bos-page">
+          <h3>Why playtesting beats guessing</h3>
+          <div class="byline">Sample article · edit any paragraph or paste in your own text</div>
+          <div class="bos-page-body"></div>
+        </article>
+        <aside class="bos-panel" aria-live="polite"></aside>
+      </div>
+      <div class="bos-dock">
+        <span class="bos-dock-label">Your squad</span>
+        <div class="bos-pets" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+        <div class="bos-key"><button id="bos-key-btn" type="button">🔑 Use your API key</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap p-grid">
+    <div></div>
+    <div class="prose">
+      <section id="pieces">
+        <span class="kicker">How it works</span>
+        <h2>Three pieces</h2>
+        <h3>1. The squad dock</h3>
+        <p>Your pets sit in a small dock at the edge of every page. Hover over a pet to see what it carries, then drag it onto anything. The pet reads what's under it and suggests only the skills that apply, so text skills for a paragraph and vision skills for an image. When nothing is selected, a command bar (<code>Alt+Shift+P</code>) searches every skill.</p>
+        <figure><img src="../assets/bundles/dock-hover-card.jpg" alt="The pet squad dock with a hover card listing a pet's skills" loading="lazy"><figcaption>The squad dock. Each pet's hover card shows what it can do and what it's allowed to read.</figcaption></figure>
+        <h3>2. Skill Studio</h3>
+        <p>The Studio is where you shape the squad. Every skill has an instruction, what it works on, what kind of result it produces (an answer, a rewrite, or comments), and a sticker. You can teach a pet a skill by dragging the skill's card onto it, or build a new skill and test it with <em>Try it</em> before it ever touches a real page.</p>
+        <div class="fig-grid">
+          <figure><img src="../assets/bundles/studio-pets.jpg" alt="Skill Studio Pets tab showing Scout and its skills" loading="lazy"><figcaption>Pets tab: one pet, its skills, and its permissions.</figcaption></figure>
+          <figure><img src="../assets/bundles/skill-editor.jpg" alt="The skill editor with a sticker designer" loading="lazy"><figcaption>Skill editor, with a sticker designer and a Try it panel.</figcaption></figure>
+        </div>
+        <h3>3. Results you approve</h3>
+        <p>Answers show up in a card next to the content. Anything that would <em>change</em> your work, like a rewrite in a text field or a comment on a Figma frame, comes back as a <strong>proposal</strong> with a green action label. Nothing is written until you click it.</p>
+        <div class="fig-grid">
+          <figure><img src="../assets/bundles/answer-card.jpg" alt="An answer card produced by a pet" loading="lazy"><figcaption>An answer card.</figcaption></figure>
+          <figure><img src="../assets/bundles/figma-history-panel.jpg" alt="History panel showing results generated on a Figma file" loading="lazy"><figcaption>Per-site history, here on a Figma file.</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="research">
+        <span class="kicker">Research &amp; design</span>
+        <h2>Ten concepts, ranked by what we could prove</h2>
+        <p>We didn't start with the pets. We started with ten interaction concepts for an "AI skill companion" with names like <em>Fetch</em> (drop a pet on a spot), <em>Peek</em> (select text and the pet guesses), <em>Burrow</em> (a hotkey command bar), <em>Charm collar</em> (loadouts with shared docs), and <em>Whistle</em> (voice). Then we ranked them by how cheaply each one could be proven and how risky it was.</p>
+        <blockquote class="pull">"The risk is that it gets annoying." That one line shaped Peek's ignore timeout, per-site blocklist, and off switch.</blockquote>
+        <p>That ranking set the build order. Burrow was the lowest-risk concept and worked everywhere. Peek was the magic moment but the most likely to irritate people, so it shipped with guardrails. Fetch and the pet squad became the core metaphor. Voice went to the bottom of the list because it needs a desktop app.</p>
+        <h3>Mapping the platform before committing</h3>
+        <p>We wrote down exactly what a browser extension can and can't do before designing interactions that depend on it. That surfaced several things that matter for the user experience:</p>
+        <ul>
+          <li><strong>Google Docs draws text on a canvas</strong>, so ordinary text selection comes back empty. We read it with a screenshot and a vision model instead, and the UI says so honestly.</li>
+          <li><strong>Hotkeys only work while Chrome is focused</strong>, and you get only four suggested shortcuts. A double-tap of ⌥ is impossible, so that concept moved to a future desktop app.</li>
+          <li><strong>Other apps are out of reach</strong> from an extension. That gave us a clear two-stage plan: an extension gets about 70% of the experience in days, and a desktop app (Tauri/Electron) handles "any app on my computer".</li>
+        </ul>
+        <h3>Designing for trust</h3>
+        <p>Three principles carried through the whole product:</p>
+        <ul>
+          <li><strong>Scoped permissions.</strong> Each pet has its own "can read" switches, so you know what each one can see.</li>
+          <li><strong>Proposals, not actions.</strong> Changes are always previewed and approved.</li>
+          <li><strong>Visible safety.</strong> Security is a character in the squad, not a hidden setting, so people can see protection happening.</li>
+        </ul>
+      </section>
+
+      <section id="security">
+        <span class="kicker">Security</span>
+        <h2>A guard pet for AI safety</h2>
+        <p>We built for the Sandia Security Track: implementing AI securely, securing agentic workflows, and making AI security visible to everyday users. Security, the hedgehog, does two jobs.</p>
+        <ul class="feature-list">
+          <li><b>On-device skills</b><span>"Check for hidden instructions" finds prompt injection, including invisible Unicode tricks. "Spot sensitive data" finds API keys, passwords, emails, and Luhn-checked card numbers. Neither ever calls a model.</span></li>
+          <li><b>Guard before send</b><span>Every request from every pet passes through the extension's service worker. Secrets and personal data are masked there before anything reaches the network, and no page script can bypass it.</span></li>
+          <li><b>Content stays data</b><span>Picked content is wrapped and treated strictly as data, so text on a page can't take over a pet.</span></li>
+          <li><b>Output is checked too</b><span>Results are scanned for data-leaking links and hidden characters before you approve them.</span></li>
+        </ul>
+        <p>The demo above uses this same scanner. Drop Security on the second paragraph to see it catch the hidden "ignore all previous instructions" note and the zero-width characters at the end.</p>
+      </section>
+
+      <section id="install">
+        <span class="kicker">Get the extension</span>
+        <h2>Run the real thing</h2>
+        <p>The full extension does much more than this page: Google Docs, Figma, images, the Studio, and history. To install it from source:</p>
+        <ol class="steps-ol">
+          <li>Clone <a href="https://github.com/kkuang-max/bundlesofskills" target="_blank" rel="noopener">the repo</a>, then run <code>npm install</code> and <code>npm run build</code>.</li>
+          <li>Open <code>chrome://extensions</code> and turn on <strong>Developer mode</strong>.</li>
+          <li>Click <strong>Load unpacked</strong> and choose the <code>extension/</code> folder.</li>
+          <li>Open the Skill Studio from the toolbar icon and add your Anthropic API key under Settings.</li>
+        </ol>
+      </section>
+
+      <section id="reflection">
+        <span class="kicker">Reflection</span>
+        <h2>What I'd take forward</h2>
+        <p>Ranking concepts by "cheapest to prove" kept a weekend hackathon build focused, and it's how I'd scope any early product. The biggest lesson was that <strong>safety features work better when people can see them</strong>. Turning the guard into a character made it something judges and testers wanted to try, not a checkbox they'd skip past.</p>
+        <p>Next steps: a small backend so users don't have to bring their own key, loadouts that auto-equip by site, and a usability study of whether a pet metaphor actually helps people understand AI permissions better than a settings page does.</p>
+      </section>
+
+      <a class="next-proj" href="pass-the-mic.html"><span><small>Next project</small><b>Pass the Mic</b></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="contact" style="padding:50px 0 40px" data-nav="dark">
+  <div class="wrap"><div class="footer" style="margin-top:0;border:0;padding:0"><span>© 2026 Vincent Ryan</span><span><a href="../index.html">Home</a> · <a href="mailto:vryan@andrew.cmu.edu">vryan@andrew.cmu.edu</a></span></div></div>
+</footer>
+
+<script src="../js/main.js?v=6" defer></script>
+<script type="module" src="../js/bundles-demo.js?v=6"></script>
+</body>
+</html>

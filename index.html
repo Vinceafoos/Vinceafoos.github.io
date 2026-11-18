@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Ryan | Design. Build. Play.</title>
+  <meta name="description" content="Vincent Ryan: MHCI student at Carnegie Mellon with a computer science background. Software, UX and games research, and interaction design.">
+  <meta property="og:title" content="Vincent Ryan | Design. Build. Play.">
+  <meta property="og:description" content="Engineering with a designer's curiosity and a developer's precision. MHCI @ Carnegie Mellon.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#eef9fb">
+  <link rel="icon" href="assets/brand/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body>
+<a class="skip" href="#build">Skip to work</a>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Vincent Ryan, home">
+      <img src="assets/brand/logo.svg" alt="" width="52" height="25">
+      <span>Vincent Ryan</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#build">Build</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/Vinceafoos" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a class="cta" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+<!-- ============================ HERO ============================ -->
+<section class="hero" data-nav="light">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="parkour" id="parkour" aria-hidden="true">
+    <svg viewBox="0 0 40 48">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+        <g class="limb arm-a"><path d="M21 15 L14 21 L18 26" stroke="#4b5c66"/></g>
+        <g class="limb b leg-a"><path d="M18 28 L12 37 L5 36" stroke="#4b5c66"/></g>
+        <line x1="22" y1="14" x2="18" y2="28" stroke="#0a1a24" stroke-width="6.5"/>
+        <g class="limb leg-b"><path d="M18 28 L24 37 L21 46" stroke="#0a1a24"/></g>
+        <g class="limb b arm-b"><path d="M21 15 L28 19 L33 15" stroke="#0a1a24"/></g>
+      </g>
+      <circle cx="24.5" cy="6.5" r="5.2" fill="#0a1a24"/>
+    </svg>
+  </div>
+
+  <div class="wrap hero-head">
+    <h1 aria-label="Design. Build. Play.">
+      <span class="w w-design">Design.</span>
+      <span class="w w-build">Build.</span>
+      <span class="w w-play">Play.</span>
+    </h1>
+    <p class="hero-sub">I approach engineering with a <strong>designer's curiosity</strong> and a <strong>developer's precision</strong>. I work where software, research, and design overlap.</p>
+  </div>
+
+  <div class="devices">
+    <!-- Console → Build -->
+    <a class="device" href="#build" data-tilt aria-label="Build: software and game projects">
+      <div class="device-tilt">
+        <div class="console-body">
+          <div class="dpad" aria-hidden="true"><i></i><i></i></div>
+          <div class="screen">
+            <div class="screen-ui">
+              <div class="screen-top"><span>P1 ▸ VR</span><span id="hiscore">HI 069</span></div>
+              <span class="screen-title">Code</span>
+              <span class="screen-line"><span id="screen-type">&gt; games</span><span class="caret"></span></span>
+              <div class="screen-ground"></div>
+              <span class="screen-coin"></span>
+              <svg class="screen-sprite" viewBox="0 0 8 9" shape-rendering="crispEdges" aria-hidden="true" fill="currentColor">
+                <rect x="3" y="0" width="2" height="2"/><rect x="2" y="2" width="4" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="2" height="2"/><rect x="6" y="3" width="1" height="1"/><rect x="3" y="5" width="2" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="2"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="8" width="1" height="1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="abxy" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <span class="console-led" aria-hidden="true"></span>
+          <span class="console-speaker" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span>
+        </div>
+      </div>
+      <div class="device-cap"><b>Build</b> software &amp; games <span class="arrow" aria-hidden="true">↓</span></div>
+    </a>
+
+    <!-- Paper → Research -->
+    <a class="device" href="#research" data-tilt aria-label="Research: UX and games research">
+      <div class="device-tilt">
+        <div class="paper-wrap">
+          <div class="skier" aria-hidden="true">
+            <svg viewBox="0 0 60 52">
+              <circle class="snow" cx="58" cy="43" r="2.6"/><circle class="snow" cx="61" cy="38" r="2"/><circle class="snow" cx="55.5" cy="39.5" r="1.6"/>
+              <path d="M1.5 45.2 Q1.2 51.4 8 52 L52 52 Q58.8 51.4 58.5 45.2 Q57 48.4 51.5 48.6 L8.5 48.6 Q3 48.4 1.5 45.2 Z" fill="#00b8d0"/>
+              <path d="M8.5 48.6 L51.5 48.6" stroke="#8ce8f3" stroke-width="1"/>
+              <path d="M22 50.4 L38 50.4" stroke="#e8f8fb" stroke-width="1" stroke-linecap="round" opacity=".7"/>
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M39 45 L38 36 L29 31" stroke="#33444f" stroke-width="5.5"/>
+                <path d="M44 20 L37 22 L27 19" stroke="#33444f" stroke-width="4.5"/>
+                <path d="M19 45 L21 36 L29 31" stroke="#0a1a24" stroke-width="5.5"/>
+                <path d="M29 31 L26.5 18" stroke="#0a1a24" stroke-width="7"/>
+                <path d="M27 19 L17 22 L9 19" stroke="#0a1a24" stroke-width="4.5"/>
+              </g>
+              <rect x="15.2" y="44" width="8.6" height="5.6" rx="1.6" fill="#0a1a24"/>
+              <rect x="35.2" y="44" width="8.6" height="5.6" rx="1.6" fill="#33444f"/>
+              <circle cx="25" cy="10.8" r="5.4" fill="#0a1a24"/>
+              <path d="M19.7 9.4 Q25 3 30.3 9.4 Z" fill="#00b8d0"/>
+              <circle cx="25" cy="4.2" r="1.7" fill="#00b8d0"/>
+            </svg>
+          </div>
+          <div class="sheet-shadow"><div class="sheet" id="sheet">
+            <div class="sheet-content">
+              <svg class="squiggle short" viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M3 7 q12 -9 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0"/></svg>
+              <span class="sheet-label">Research</span>
+              <svg class="squiggle" viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M3 7 q12 -9 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0"/></svg>
+              <svg class="squiggle hl" viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M3 7 q12 -9 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0"/></svg>
+              <svg class="squiggle short" viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M3 7 q12 -9 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0"/></svg>
+              <div class="sheet-chart" aria-hidden="true"><span style="--h:45%"></span><span style="--h:70%"></span><span style="--h:100%"></span><span style="--h:60%"></span><span style="--h:82%"></span></div>
+            </div>
+            <div class="fold"></div>
+            <div class="lens" id="lens" aria-hidden="true"><div class="lens-glass"><div class="lens-clone" id="lens-clone"></div></div><div class="lens-handle"></div></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="device-cap"><b>Research</b> UX &amp; games <span class="arrow" aria-hidden="true">↓</span></div>
+    </a>
+  </div>
+
+  <svg class="hero-ridge" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 120 L0 92 L160 60 L260 82 L420 30 L560 78 L700 46 L820 84 L980 38 L1120 80 L1260 52 L1440 88 L1440 120Z" fill="#dcf2f7" opacity=".7"/>
+    <path d="M0 120 L0 104 L200 80 L340 100 L520 70 L660 98 L860 72 L1040 102 L1220 78 L1440 100 L1440 120Z" fill="#071219"/>
+  </svg>
+  <a class="scroll-cue" href="#build" aria-label="Scroll to work"><span></span>scroll</a>
+</section>
+
+<!-- ============================ BUILD ============================ -->
+<section class="section build" id="build" data-nav="dark">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <span class="kicker">01 · Build</span>
+        <h2>Software that ships. Games that feel good.</h2>
+      </div>
+      <p class="reveal d1">Hackathon builds, AI tools, and games. I prototype quickly, but I also care about the parts users never see, like a database lock that holds when two people tap at once, or a guard that checks data before it leaves the browser.</p>
+    </div>
+
+    <a class="feature reveal" href="projects/bundles-of-skills.html">
+      <div class="feature-media">
+        <img src="assets/bundles/hero.jpg" alt="Bundles of Skills logo: a purple bird peeking over the wordmark" loading="lazy">
+        <div class="feature-pets" id="feature-pets" aria-hidden="true"></div>
+      </div>
+      <div class="feature-body">
+        <div class="badges"><span class="badge badge-gold">🏆 Top 5 of 69 teams</span><span class="badge badge-live">Live demo</span></div>
+        <div class="meta">CMU Nova Hackathon · Nov 2026 · Chrome extension</div>
+        <h3>Bundles of Skills</h3>
+        <p>A squad of AI "pets" for your browser. Each pet carries a set of skills and its own permissions. Drag one onto a paragraph, an image, a Google Doc, or a Figma frame, and it only offers skills that fit that content. A security pet guards every request before it leaves the browser.</p>
+        <ul class="chips"><li class="chip">Chrome MV3</li><li class="chip">Claude API</li><li class="chip">JavaScript</li><li class="chip">AI safety</li><li class="chip">Interaction design</li></ul>
+        <span class="link-arrow">Read the case study and try it <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+
+    <div class="cards">
+      <a class="card reveal" href="projects/pass-the-mic.html">
+        <div class="card-media">
+          <div class="art-mic"><img src="assets/passmic/groups.png" alt="Pass the Mic groups screen with claim buttons" loading="lazy"></div>
+          <span class="tag">HackCMU · Sep 2026</span>
+        </div>
+        <div class="card-body">
+          <div class="meta">Mobile · Realtime · Postgres</div>
+          <h3>Pass the Mic</h3>
+          <p>A voice-note relay for friend groups. Whoever claims the clip first gets to reply, and an atomic Postgres claim makes sure only one person wins.</p>
+          <ul class="chips"><li class="chip">Expo</li><li class="chip">React Native</li><li class="chip">Supabase</li></ul>
+          <span class="link-arrow">Run the claim race <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="card reveal d1" href="projects/pitch-imperfect.html">
+        <div class="card-media">
+          <div class="art-pitch"><canvas id="pitch-art" aria-hidden="true"></canvas><div class="lyric">♪ Twinkle, twinkle, <em>little star</em> ♪</div></div>
+          <span class="tag">Gate Hacks · Fall 2025</span>
+        </div>
+        <div class="card-body">
+          <div class="meta">Web Audio · Realtime DSP</div>
+          <h3>Pitch Imperfect</h3>
+          <p>A karaoke web app that listens through your mic, detects your pitch in real time, and scores how close you are to each line's target note.</p>
+          <ul class="chips"><li class="chip">React</li><li class="chip">Web Audio API</li><li class="chip">Pitch detection</li></ul>
+          <span class="link-arrow">Sing into it <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="card reveal d2" href="projects/compete-clean.html">
+        <div class="card-media">
+          <img src="assets/compete/shot1.jpg" alt="Compete Clean title screen: pixel-art athlete on a podium in a stadium" loading="lazy">
+          <span class="tag">Game · Spring 2026</span>
+        </div>
+        <div class="card-body">
+          <div class="meta">2D platformer · Python / raylib</div>
+          <h3>Compete Clean</h3>
+          <p>A retro platformer where you play an anti-doping agent collecting evidence across three levels, dodging javelins, wind, and sand pits on the way.</p>
+          <ul class="chips"><li class="chip">raylib</li><li class="chip">Game design</li><li class="chip">Level design</li></ul>
+          <span class="link-arrow">See the design doc <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="minor reveal">
+      <h3>Also built</h3>
+      <ul>
+        <li><b>Basketball stats platform</b><span>A normalized PostgreSQL schema for game data, with a player summary interface that keeps every original stat viewable.</span><i>PostgreSQL · Django · Angular</i></li>
+        <li><b>Spelling Bee engine</b><span>A replica of the NYT Spelling Bee game logic: word validation, pangrams, and scoring.</span><i>Java</i></li>
+        <li><b>Scrolling arcade game</b><span>A side-scroller with interactive entities, scoring, win states, and image manipulation.</span><i>Java</i></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RESEARCH ============================ -->
+<section class="section research" id="research" data-nav="paper">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <span class="kicker">02 · Research</span>
+        <h2>Understand people first. <em>Then build to learn.</em></h2>
+      </div>
+      <p class="reveal d1">My MHCI training gives me the methods and my engineering background lets me test ideas quickly. I like research that ends in something you can put in front of people, whether that's a prototype, a playtest, or a decision.</p>
+    </div>
+
+    <div class="process reveal">
+      <div class="step">
+        <span class="step-n">01</span>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+        <h3>Discover</h3>
+        <p>Find out what people are actually trying to do and where the friction is.</p>
+        <small>Interviews · contextual inquiry · think-alouds · diary studies</small>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></svg></div>
+        <h3>Synthesize</h3>
+        <p>Turn messy observations into patterns, models, and clear problem statements.</p>
+        <small>Affinity mapping · journey maps · personas · flow models</small>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13.5 5l-3 14"/></svg></div>
+        <h3>Prototype</h3>
+        <p>Build the cheapest thing that can answer the question, from paper to working code.</p>
+        <small>Storyboards · speed dating · Figma · working prototypes</small>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+        <h3>Evaluate</h3>
+        <p>Measure whether it works for real people, then decide what to change.</p>
+        <small>Usability testing · playtesting · surveys · heuristic evaluation</small>
+      </div>
+    </div>
+
+    <div class="studies-head reveal">
+      <h3>Research in the work</h3>
+      <p>The questions behind each build. Every card links to the research and design section of a full case study.</p>
+    </div>
+
+    <div class="studies">
+      <a class="study reveal" href="projects/bundles-of-skills.html#research">
+        <div class="study-top"><h4>Bundles of Skills</h4><span class="from">Concept research</span></div>
+        <p class="q">"How do you give people powerful AI help without taking away their control?"</p>
+        <p>We generated ten interaction concepts and ranked them by how cheaply each one could be proven. We mapped what a browser extension can and can't do before committing, and designed a "proposal you approve" pattern so that nothing changes your work without consent.</p>
+        <div class="methods"><span>Concept generation</span><span>Feasibility mapping</span><span>Trust &amp; consent design</span></div>
+        <span class="link-arrow">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="study reveal d1" href="projects/compete-clean.html#design">
+        <div class="study-top"><h4>Compete Clean</h4><span class="from">Games research</span></div>
+        <p class="q">"Can a light, retro platformer carry a serious story about doping in sport?"</p>
+        <p>We used action and enigma codes to plan how the gameplay itself tells the story. We tuned difficulty to escalate across the levels and built debug tooling (hitboxes, live stats, level skip) so playtests stay fast.</p>
+        <div class="methods"><span>Narrative analysis</span><span>Difficulty tuning</span><span>Playtest tooling</span></div>
+        <span class="link-arrow">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="study reveal" href="projects/pass-the-mic.html#design">
+        <div class="study-top"><h4>Pass the Mic</h4><span class="from">Social design</span></div>
+        <p class="q">"How do you keep a group conversation fair when everyone is racing to reply?"</p>
+        <p>We designed turn-taking as a social mechanic. Claims expire after ten minutes, and you can't claim a reply to your own clip, so two friends can't ping-pong the whole conversation and quieter people get a turn.</p>
+        <div class="methods"><span>Social dynamics</span><span>Rule design</span><span>Edge-case mapping</span></div>
+        <span class="link-arrow">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <!-- TODO(Vincent): replace this card with an MHCI study (UCRE / IxD project) when ready -->
+      <div class="study pending reveal d1">
+        <div class="study-top"><h4>MHCI studio work</h4><span class="from">In progress</span></div>
+        <p class="q">Case studies from User-Centered Research &amp; Evaluation and Interaction Design Fundamentals are coming soon.</p>
+        <p>These will cover full research cycles, from contextual inquiry and synthesis through to evaluated design recommendations.</p>
+        <div class="methods"><span>UCRE</span><span>IxD</span><span>Persuasive Design</span><span>Design of AI Products</span></div>
+      </div>
+    </div>
+
+    <div class="toolkit principles">
+      <div class="tool-col reveal">
+        <h4>Principle 01</h4>
+        <h3>Prototype the question, not the product.</h3>
+        <p>The first build should answer one thing. At Nova we ranked ten ideas by how cheaply each could be proven, then built the one we could test by Sunday.</p>
+      </div>
+      <div class="tool-col reveal d1">
+        <h4>Principle 02</h4>
+        <h3>Rules and constants are design decisions.</h3>
+        <p>A ten-minute claim window or a pitch-smoothing value shapes how something feels as much as any screen. They deserve testing with real people, not just a guess.</p>
+      </div>
+      <div class="tool-col reveal d2">
+        <h4>Principle 03</h4>
+        <h3>Make testing cheap enough to do often.</h3>
+        <p>Debug overlays, level skips, and fake data are research tools. The easier a playtest is to run, the more of them actually happen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="section about" id="about" data-nav="light">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy">
+        <span class="kicker reveal">03 · About</span>
+        <h2 class="reveal">An engineer who wants to know <em style="font-family:var(--f-serif);font-weight:400">why</em> before deciding <em style="font-family:var(--f-serif);font-weight:400">how</em>.</h2>
+        <p class="reveal">I'm Vincent. I came to HCI from the engineering side, after studying computer science at Colgate, and I'm now in the MHCI program at <strong>Carnegie Mellon</strong>. I like the moment when a confident plan meets a real person and something unexpected happens. That's usually where the interesting work starts.</p>
+        <p class="reveal">Running distance taught me to care about small adjustments, and teaching kids to build games showed me how quickly "obvious" falls apart. I'm happiest when I can talk to people in the morning and ship code in the afternoon.</p>
+        <div class="roles">
+          <div class="role reveal"><span class="role-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3M16 11.5h.01M18 13.5h.01"/></svg></span><div><b>Games user research</b><span>Playtesting, player experience, and the designer's intent versus what players actually do</span></div></div>
+          <div class="role reveal d1"><span class="role-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 0 1 0 8M22 21c0-3-1.5-5-4-5.7"/></svg></span><div><b>UX research</b><span>Mixed methods, rigorous synthesis, and findings teams act on</span></div></div>
+          <div class="role reveal d2"><span class="role-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13.5 5l-3 14"/></svg></span><div><b>Forward-deployed &amp; product engineering</b><span>Working with customers to understand the problem, then building the fix</span></div></div>
+        </div>
+      </div>
+
+      <aside class="profile reveal d1">
+        <div class="profile-top">
+          <div class="avatar"><img src="assets/brand/headshot.jpg" alt="Vincent Ryan" width="84" height="84"></div>
+          <h3>Vincent Ryan</h3>
+          <p>Pittsburgh, PA · Morgantown, WV roots</p>
+        </div>
+        <ul class="facts">
+          <li><span class="k">Now</span><span class="v"><b>MHCI at Carnegie Mellon</b><span>Through summer 2027</span></span></li>
+          <li><span class="k">Before</span><span class="v"><b>CS &amp; Economics at Colgate</b><span>Plus four years of D1 running</span></span></li>
+          <li><span class="k">Lately</span><span class="v"><b>Hackathons</b><span>Three since fall 2025, one top-5 finish</span></span></li>
+          <li><span class="k">Full story</span><span class="v"><b><a href="https://www.linkedin.com/in/vryan/" target="_blank" rel="noopener">LinkedIn ↗</a></b><span>Experience, teaching, coursework</span></span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="contact" id="contact" data-nav="dark">
+  <div class="wrap">
+    <span class="kicker reveal" style="color:var(--cyan)">04 · Contact</span>
+    <h2 class="reveal" style="margin-top:18px">Let's make something people <span>want</span> to use.</h2>
+    <div class="contact-row reveal">
+      <a class="btn btn-cyan copy-email" href="mailto:vryan@andrew.cmu.edu" data-email="vryan@andrew.cmu.edu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        vryan@andrew.cmu.edu<span class="toast">Copied to clipboard</span>
+      </a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/vryan/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/Vinceafoos" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>GitHub</a>
+    </div>
+    <footer class="footer">
+      <span>© <span id="year">2026</span> Vincent Ryan</span>
+      <span><a href="#top">Back to top ↑</a></span>
+    </footer>
+  </div>
+</section>
+</main>
+
+<script src="js/topo.js?v=6" defer></script>
+<script src="js/main.js?v=6" defer></script>
+<script src="js/parkour.js?v=6" defer></script>
+<script type="module">
+  import { petArt } from "./js/vendor/pet-art.js";
+  const el = document.getElementById("feature-pets");
+  if (el) el.innerHTML = [["dog"], ["bird"], ["cat"], ["frog"], ["hedgehog"]].map(([s]) => petArt(s, null, 46)).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pass the Mic | Vincent Ryan</title>
+  <meta name="description" content="Pass the Mic: a voice-note relay for friend groups with an atomic Postgres claim. Built at HackCMU 2026.">
+  <link rel="icon" href="../assets/brand/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=6">
+  <link rel="stylesheet" href="../css/demos.css?v=6">
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html" aria-label="Vincent Ryan, home"><img src="../assets/brand/logo.svg" alt="" width="52" height="25"><span>Vincent Ryan</span></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#build">Build</a></li>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="https://github.com/Vinceafoos" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a class="cta" href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="p-hero dark" data-nav="dark" style="background:linear-gradient(160deg,#0f2a20,#071219 70%)">
+  <div class="wrap">
+    <a class="back" href="../index.html#build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>All work</a>
+    <div class="p-badges"><span class="badge badge-live">Interactive</span></div>
+    <h1>Pass the Mic</h1>
+    <p class="p-lede">A voice-note relay for friend groups. Each group has one active clip. The first friend to claim it gets to listen and record the next one. At the end of the day, the whole chain plays back as a recap episode.</p>
+    <dl class="p-meta">
+      <div><dt>Event</dt><dd>HackCMU<br>Sep 2026</dd></div>
+      <div><dt>Platform</dt><dd>iOS &amp; Android (Expo)</dd></div>
+      <div><dt>Stack</dt><dd>Expo · React Native · TypeScript · Supabase</dd></div>
+      <div><dt>Links</dt><dd><a href="https://github.com/Vinceafoos/pass-the-tea" target="_blank" rel="noopener">GitHub repo ↗</a><br><a href="#race">Run the race ↓</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="p-body">
+  <div class="wrap p-grid">
+    <ul class="toc">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#race">The claim race</a></li>
+      <li><a href="#design">Social design</a></li>
+      <li><a href="#build">Architecture</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+    </ul>
+    <div class="prose">
+      <section id="overview">
+        <span class="kicker">Overview</span>
+        <h2>Group chats, but you have to earn the reply</h2>
+        <p>Group chats are either silent or overwhelming. We wanted something in between, closer to a game of telephone. One person drops a voice note, everyone gets a nudge, and whoever claims it first listens and responds. Then the mic passes on.</p>
+        <p>Being first creates a small, fun rush, but it also creates a hard engineering problem. If two friends tap <em>Claim</em> at the same moment, exactly one of them has to win, every time, on every device.</p>
+        <div class="fig-grid" style="max-width:520px">
+          <figure><img src="../assets/passmic/home.png" alt="Pass the Mic home screen design" loading="lazy"><figcaption>Home screen design.</figcaption></figure>
+          <figure><img src="../assets/passmic/groups.png" alt="Groups screen showing Claim, Waiting and Nudge states" loading="lazy"><figcaption>Groups: Claim, Waiting, and Nudge states.</figcaption></figure>
+        </div>
+        <!-- TODO(Vincent): add your role on the team -->
+      </section>
+
+      <section id="race">
+        <span class="kicker">The claim race</span>
+        <h2>Two taps, one winner</h2>
+        <p>Below is a simulation of what happens in the database. Tap both phones, or hit <strong>Race!</strong> to tap them at the same instant. Then turn off the row lock to see the bug it prevents.</p>
+      </section>
+    </div>
+  </div>
+
+  <div class="wrap" style="max-width:1080px">
+    <div class="ptm" id="ptm">
+      <div class="ptm-grid">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-user"><i style="background:#4d8bf0">A</i>Alex</div>
+          <div class="phone-card" id="card-a"><div class="wave"><span style="--h:12px"></span><span style="--h:26px"></span><span style="--h:18px"></span><span style="--h:32px"></span><span style="--h:14px"></span><span style="--h:24px"></span><span style="--h:10px"></span><span style="--h:28px"></span><span style="--h:16px"></span></div><b>New voice note</b><small>from Sam · College Crew</small><button class="claim-btn" id="claim-a" type="button">Claim &amp; Listen</button></div>
+          <div class="phone-status" id="status-a" role="status"></div>
+        </div>
+        <div class="db">
+          <div class="db-head"><span>Postgres · messages</span><span class="db-lock">🔓 unlocked</span></div>
+          <div class="db-row"><span class="k">id</span>: 33333333-…<br><span class="k">sender</span>: 'Sam'<br><span class="k">claimed_by</span>: <b id="db-claimed">NULL</b></div>
+          <div class="db-log" aria-live="polite"></div>
+        </div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-user"><i style="background:#ef7b54">J</i>Jamie</div>
+          <div class="phone-card" id="card-b"><div class="wave"><span style="--h:12px"></span><span style="--h:26px"></span><span style="--h:18px"></span><span style="--h:32px"></span><span style="--h:14px"></span><span style="--h:24px"></span><span style="--h:10px"></span><span style="--h:28px"></span><span style="--h:16px"></span></div><b>New voice note</b><small>from Sam · College Crew</small><button class="claim-btn" id="claim-b" type="button">Claim &amp; Listen</button></div>
+          <div class="phone-status" id="status-b" role="status"></div>
+        </div>
+      </div>
+      <div class="ptm-bar">
+        <label><input type="checkbox" id="ptm-lock" checked> Use <code style="background:rgba(255,255,255,.1);color:#fff">SELECT … FOR UPDATE</code> row lock</label>
+        <span style="display:flex;gap:8px"><button class="btn btn-ghost" id="ptm-reset" type="button" style="color:#eaf6ef">Reset</button><button class="btn btn-cyan" id="ptm-race" type="button">Race!</button></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap p-grid">
+    <div></div>
+    <div class="prose">
+      <section>
+        <h3>Why it works</h3>
+        <p>Clients are never allowed to write <code>claimed_by</code> directly. They call a Postgres function, <code>claim_message()</code>, through Supabase RPC. Inside one transaction, it locks the thread row and then the message row, checks every rule, and only then writes the claim. A second transaction arriving a millisecond later blocks on the lock, and when it gets in, it sees the clip is taken and returns <code>already_claimed</code> with the winner's name. The loser's phone shows <em>"Too slow"</em> instantly through Supabase Realtime, with no refresh needed.</p>
+        <div class="codeblock"><span class="c">-- Callers must use this RPC, not direct updates.</span>
+<span class="k">SELECT</span> * <span class="k">INTO</span> v_thread <span class="k">FROM</span> threads <span class="k">WHERE</span> id = v_thread_id <span class="k">FOR UPDATE</span>;
+<span class="k">SELECT</span> * <span class="k">INTO</span> v_message <span class="k">FROM</span> messages <span class="k">WHERE</span> id = p_message_id <span class="k">FOR UPDATE</span>;
+
+<span class="k">IF</span> v_message.claimed_by <span class="k">IS NOT NULL AND NOT</span> v_expired <span class="k">THEN</span>
+  <span class="k">RETURN</span> jsonb_build_object(<span class="s">'success'</span>, false, <span class="s">'reason'</span>, <span class="s">'already_claimed'</span>, …);
+<span class="k">END IF</span>;</div>
+        <p>Storage row-level security backs this up. Even if someone skipped the app, they couldn't download a clip they hadn't claimed.</p>
+      </section>
+
+      <section id="design">
+        <span class="kicker">Social design</span>
+        <h2>Rules that keep it fair</h2>
+        <p>A pure "fastest finger wins" game rewards whoever is always on their phone. We added rules so the relay keeps moving through the group:</p>
+        <ul class="feature-list">
+          <li><b>No self-replies</b><span>You can't claim your own clip.</span></li>
+          <li><b>No ping-pong</b><span>You can't claim a reply to your own clip, so two people can't take over the thread.</span></li>
+          <li><b>Claims expire</b><span>If the winner doesn't respond within 10 minutes, the clip opens up again.</span></li>
+          <li><b>End-of-day recap</b><span>When the day closes, everyone can hear the whole chain as an episode, react, comment, and save it.</span></li>
+        </ul>
+      </section>
+
+      <section id="build">
+        <span class="kicker">Architecture</span>
+        <h2>Small surface, strong guarantees</h2>
+        <ul>
+          <li><strong>Expo + React Native + TypeScript</strong> with Expo Router for the iOS and Android app.</li>
+          <li><strong>Supabase</strong> for auth, Postgres, Realtime subscriptions, and private Storage for audio.</li>
+          <li><strong>Database functions as the API.</strong> <code>claim_message</code>, <code>create_response_message</code>, and <code>end_day</code> hold all the rules in one place. SQL migrations and SQL tests keep them honest.</li>
+          <li><strong>Unit tests</strong> (Vitest) on claim decision logic, plus a scripted two-device race for the demo.</li>
+        </ul>
+      </section>
+
+      <section id="reflection">
+        <span class="kicker">Reflection</span>
+        <h2>What I learned</h2>
+        <p>The most important feature of this app is one users never see. Putting the rules in the database instead of the client made the app simpler, safer, and easier to test. It's the same instinct I'd bring to customer-facing engineering work: find the one guarantee the experience depends on, and make it impossible to break.</p>
+      </section>
+
+      <a class="next-proj" href="pitch-imperfect.html"><span><small>Next project</small><b>Pitch Imperfect</b></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="contact" style="padding:50px 0 40px" data-nav="dark">
+  <div class="wrap"><div class="footer" style="margin-top:0;border:0;padding:0"><span>© 2026 Vincent Ryan</span><span><a href="../index.html">Home</a> · <a href="mailto:vryan@andrew.cmu.edu">vryan@andrew.cmu.edu</a></span></div></div>
+</footer>
+<script src="../js/main.js?v=6" defer></script>
+<script type="module" src="../js/claim-race.js?v=6"></script>
+</body>
+</html>
